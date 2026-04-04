@@ -6,22 +6,25 @@ function TodoList() {
   const dispatch = useDispatch();
 
   return (
-    <ul>
-      {todos.map((todo) => (
-        <li key={todo.id}>
-          <span
-            onClick={() => dispatch(toggleTodo(todo.id))}
-            style={{
-              textDecoration: todo.completed ? "line-through" : "none",
-              cursor: "pointer",
-            }}
-          >
-            {todo.text}
-          </span>
-          <button onClick={() => dispatch(deleteTodo(todo.id))}>❌</button>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <span>Total todos count: {Object.keys(todos).length}</span>
+      <ul>
+        {todos.map((todo) => (
+          <li key={todo.id}>
+            <span
+              onClick={() => dispatch(toggleTodo(todo.id))}
+              style={{
+                textDecoration: todo.completed ? "line-through" : "none",
+                cursor: "pointer",
+              }}
+            >
+              {todo.text}
+            </span>
+            <button onClick={() => dispatch(deleteTodo(todo.id))}>❌</button>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
