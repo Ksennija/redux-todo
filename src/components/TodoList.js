@@ -1,22 +1,16 @@
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTodo, deleteTodo } from "../features/todos/todoSlice";
+import { selectFilteredTodos } from "../selectos";
 
 function TodoList() {
-  const todos = useSelector((state) => state.todos.items);
+  const todos = useSelector(selectFilteredTodos);
   const dispatch = useDispatch();
-  const filter = useSelector((state) => state.todos.filter);
-  const filteredTodos =
-    filter === "all"
-      ? todos
-      : filter === "active"
-      ? todos.filter((t) => !t.completed)
-      : todos.filter((t) => t.completed);
 
   return (
     <div>
-      <span>Todos count: {Object.keys(filteredTodos).length}</span>
+      <span>Todos count: {Object.keys(todos).length}</span>
       <ul>
-        {filteredTodos.map((todo) => (
+        {todos.map((todo) => (
           <li key={todo.id}>
             <span
               onClick={() => dispatch(toggleTodo(todo.id))}
