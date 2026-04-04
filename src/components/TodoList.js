@@ -4,12 +4,19 @@ import { toggleTodo, deleteTodo } from "../features/todos/todoSlice";
 function TodoList() {
   const todos = useSelector((state) => state.todos.items);
   const dispatch = useDispatch();
+  const filter = useSelector((state) => state.todos.filter);
+  const filteredTodos =
+    filter === "all"
+      ? todos
+      : filter === "active"
+      ? todos.filter((t) => !t.completed)
+      : todos.filter((t) => t.completed);
 
   return (
     <div>
-      <span>Total todos count: {Object.keys(todos).length}</span>
+      <span>Todos count: {Object.keys(filteredTodos).length}</span>
       <ul>
-        {todos.map((todo) => (
+        {filteredTodos.map((todo) => (
           <li key={todo.id}>
             <span
               onClick={() => dispatch(toggleTodo(todo.id))}
