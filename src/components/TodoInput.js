@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo } from "../features/todos/todoSlice";
+import { addTodo, clearCompleted } from "../features/todos/todoSlice";
 
 function TodoInput() {
   const [text, setText] = useState("");
@@ -12,6 +12,10 @@ function TodoInput() {
     setText("");
   };
 
+  const handleClear = () => {
+    dispatch(clearCompleted());
+  };
+
   return (
     <div>
       <input
@@ -20,6 +24,7 @@ function TodoInput() {
         placeholder="Enter todo"
       />
       <button onClick={handleAdd}>Add</button>
+      <button onClick={handleClear}>Clear completed</button>
     </div>
   );
 }
