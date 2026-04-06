@@ -12,7 +12,9 @@ export const store = configureStore({
 });
 
 store.subscribe(() => {
+  const state = store.getState();
   saveState({
-    todos: store.getState().todos,
+    todos: state.todos.items,
+    filter: state.todos.filter,
   });
 });
