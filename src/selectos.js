@@ -1,7 +1,10 @@
-export const selectFilteredTodos = (state) => {
-  const { items, filter } = state.todos;
+import { createSelector } from "@reduxjs/toolkit";
 
-  if (filter === "active") return items.filter((t) => !t.completed);
-  if (filter === "completed") return items.filter((t) => t.completed);
-  return items;
-};
+export const selectFilteredTodos = createSelector(
+  [(state) => state.todos.items, (state) => state.todos.filter],
+  (items, filter) => {
+    if (filter === "active") return items.filter((t) => !t.completed);
+    if (filter === "completed") return items.filter((t) => t.completed);
+    return items;
+  }
+);

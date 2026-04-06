@@ -1,8 +1,16 @@
 export const loadState = () => {
   try {
     const serializedState = localStorage.getItem("todosState");
+    const parsed = JSON.parse(serializedState);
+
     if (!serializedState) return undefined;
-    return JSON.parse(serializedState);
+
+    return {
+      todos: {
+        items: parsed.todos || [],
+        filter: parsed.filter || "all",
+      },
+    };
   } catch (e) {
     return undefined;
   }
