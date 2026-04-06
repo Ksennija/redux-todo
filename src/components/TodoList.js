@@ -41,6 +41,9 @@ function TodoList() {
                 <input
                   value={editText}
                   onChange={(e) => setEditText(e.target.value)}
+                  onKeyDown={(e) =>
+                    e.key === "Enter" ? saveEdit(todo.id) : null
+                  }
                 />
                 <button onClick={() => saveEdit(todo.id)}>💾</button>
                 <button onClick={cancelEdit}>❌</button>

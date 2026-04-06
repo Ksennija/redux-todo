@@ -21,6 +21,7 @@ function TodoInput() {
       <input
         value={text}
         onChange={(e) => setText(e.target.value)}
+        onKeyDown={(e) => (e.key === "Enter" ? handleAdd() : null)}
         placeholder="Enter todo"
       />
       <button onClick={handleAdd}>Add</button>
